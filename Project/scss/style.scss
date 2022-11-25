@@ -1,0 +1,123 @@
+@import "resetStyle.scss";
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+
+body{
+   background: #c1bfbe;
+}
+
+._container {
+}
+
+.wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.main {
+      &__content {
+         min-width: fit-content;
+      }
+		&__container {
+         background: #a8a1a7;
+         padding: 15px;
+         border: solid 2px #c1bfbe;
+         border-radius: 10px;
+		}
+
+      &__getInfo {   
+         display: flex;
+         justify-content: space-between;
+         flex-wrap: nowrap;
+      }
+
+		&__input {
+         padding: 0px 5px;  
+         margin-right: 5px;
+         font-size: 20px;
+         flex: 1 1 0px;
+		}
+
+		&__search {
+         padding: 5px;
+         font-size: 20px;
+		}
+
+		&__info {
+         display: flex;
+		}
+
+		&__city {
+         font-size: 20px;
+         text-align: center;
+         margin: 5px 0px;
+         padding: 5px;
+         background: #c1bfbe;
+         border: solid 2px #a8a1a7;
+         border-radius: 10px;
+		}
+
+		&__temp {
+         background: #c1bfbe;
+         font-size: 20px;
+         &>*{
+            padding: 5px;
+         }
+         border: solid 2px #a8a1a7;
+         border-radius: 10px;
+         margin-right: 5px;
+         padding: 5px;
+         // display: flex;
+         // flex-direction: column;
+         // flex: 1 1 75%;
+		}
+
+		&__weather {
+         border: solid 2px #a8a1a7;
+         border-radius: 10px;
+         background: #c1bfbe;
+         text-align: center;
+         // display: flex;
+         // flex-direction: column;
+         // flex: 1 1 25%;
+      }
+
+		&__wind {
+		}
+}
+
+.item {
+   display: flex;
+   &>*{height: 100%;}
+   flex-direction: column;
+}
+
+.temp {
+
+		&__now {
+		}
+
+		&__min {
+		}
+
+		&__max {
+		}
+}
+.weather {
+
+		&__main {
+         padding: 5px 0;
+         font-size: 20px;
+		}
+
+		&__description {
+         padding: 5px;
+         font-size: 15px;
+         flex: 1 1 auto;
+		}
+
+		&__icon {
+		}
+
+		&__logo {
+		}
+}
