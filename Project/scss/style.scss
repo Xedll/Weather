@@ -15,7 +15,6 @@ body{
 }
 .main {
       &__content {
-         min-width: fit-content;
       }
 		&__container {
          background: #a8a1a7;
@@ -25,38 +24,53 @@ body{
 		}
 
       &__getInfo {   
+      }
+
+      &__search {
          display: flex;
-         justify-content: space-between;
          flex-wrap: nowrap;
+      }
+
+      &__lang {
+         padding: 5px;
+         margin: 5px 0;
       }
 
 		&__input {
          padding: 0px 5px;  
-         margin-right: 5px;
          font-size: 20px;
-         flex: 1 1 0px;
 		}
 
-		&__search {
+		&__button {
          padding: 5px;
          font-size: 20px;
 		}
 
 		&__info {
          display: flex;
+         flex-direction: column;
 		}
 
-		&__city {
-         font-size: 20px;
+      &__name {
          text-align: center;
          margin: 5px 0px;
          padding: 5px;
          background: #c1bfbe;
          border: solid 2px #a8a1a7;
          border-radius: 10px;
+      }
+
+		&__city {
+         font-size: 20px;
+         margin-bottom: 5px;
 		}
 
+      &__country {
+         font-size: 15px;
+      }
+
 		&__temp {
+         text-align: center;
          background: #c1bfbe;
          font-size: 20px;
          &>*{
@@ -64,11 +78,8 @@ body{
          }
          border: solid 2px #a8a1a7;
          border-radius: 10px;
-         margin-right: 5px;
          padding: 5px;
-         // display: flex;
-         // flex-direction: column;
-         // flex: 1 1 75%;
+         margin: 5px 0;
 		}
 
 		&__weather {
@@ -76,19 +87,28 @@ body{
          border-radius: 10px;
          background: #c1bfbe;
          text-align: center;
-         // display: flex;
-         // flex-direction: column;
-         // flex: 1 1 25%;
       }
 
 		&__wind {
 		}
+
+      &__logs {
+         font-size: 20px;
+         border: solid 2px #a8a1a7;
+         border-radius: 10px;
+         background: #c1bfbe;
+         text-align: center;  
+         padding: 5px;
+      }
 }
 
-.item {
-   display: flex;
-   &>*{height: 100%;}
-   flex-direction: column;
+.log {
+   &__logs {
+      padding:5px;
+   }
+   &__title {
+      margin-bottom: 5px;
+   }
 }
 
 .temp {
@@ -96,11 +116,6 @@ body{
 		&__now {
 		}
 
-		&__min {
-		}
-
-		&__max {
-		}
 }
 .weather {
 
@@ -112,7 +127,6 @@ body{
 		&__description {
          padding: 5px;
          font-size: 15px;
-         flex: 1 1 auto;
 		}
 
 		&__icon {
