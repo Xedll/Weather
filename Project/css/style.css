@@ -95,8 +95,14 @@ body {
   flex-wrap: nowrap;
 }
 .main__lang {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 2px #a8a1a7;
+  border-radius: 10px;
+  background: #c1bfbe;
+  margin: 5px 0 0 0;
   padding: 5px;
-  margin: 5px 0;
 }
 .main__input {
   padding: 0px 5px;
@@ -150,6 +156,18 @@ body {
   background: #c1bfbe;
   text-align: center;
   padding: 5px;
+}
+
+.lang__title {
+  text-align: center;
+  margin: 5px 5px 10px 5px;
+  font-size: 20px;
+  line-height: 1px;
+  padding-top: 5px;
+}
+.lang__select {
+  padding: 5px;
+  margin: 5px;
 }
 
 .log__logs {
