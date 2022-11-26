@@ -28,11 +28,11 @@ let langs = {
 }
 
 window.onload = () => {
-   getInfo('Казань', 'ru')
+   getInfo('Москва', 'ru')
    setLang()
 }
 
-const editInfo = function (info, language) {
+const setInfo = function (info, language) {
    document.querySelector('.main__city').textContent = info.city;
    document.querySelector('.main__country').textContent = info.country;
    document.querySelector('.temp__now').textContent = langs[language].temperature + ': ' + info.temp + "°C";
@@ -47,7 +47,7 @@ const setLang = function () {
    searchCity.placeholder = langs[searchLang.value].city
    document.querySelector('.log__title').textContent = langs[searchLang.value].history
    document.querySelector('.lang__title').textContent = langs[searchLang.value].language
-   editInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
+   setInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
 
 }
 
@@ -59,6 +59,8 @@ const getInfo = function (city, lang) {
       .then((result) => {
          if (result.message) {
             document.querySelector('.main__city').textContent = result.message[0].toUpperCase() + result.message.slice(1)
+            temp.push({ city: result.message[0].toUpperCase() + result.message.slice(1), country: ' ', temp: 0, weather: { description: ' ', icon: ' ', id: ' ', main: ' ' }, wind: 0 })
+            return temp
          } else {
             if (temp.length >= 5) {
                temp.splice(0, 1)
@@ -82,6 +84,7 @@ const getInfo = function (city, lang) {
          }
       })
       .then((info) => {
+         console.log(info)
          document.querySelector('.log__logs').innerHTML = ``
          info.forEach((item, index) => {
             document.querySelector('.log__logs').innerHTML += `<option selected value=${index}>${item.city}</option>`
@@ -89,7 +92,7 @@ const getInfo = function (city, lang) {
          return info
       })
       .then((res) => {
-         editInfo(res[document.querySelector('.log__logs').value], lang)
+         setInfo(res[document.querySelector('.log__logs').value], lang)
       })
       .catch((err) => {
          console.log(err)
@@ -97,7 +100,7 @@ const getInfo = function (city, lang) {
 }
 
 document.querySelector('.log__logs').onchange = function (e) {
-   editInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
+   setInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
 }
 
 searchLang.onchange = function () {
