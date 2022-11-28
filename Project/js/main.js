@@ -27,30 +27,6 @@ let langs = {
    }
 }
 
-window.onload = () => {
-   getInfo('Москва', 'ru')
-   setLang()
-}
-
-const setInfo = function (info, language) {
-   document.querySelector('.main__city').textContent = info.city;
-   document.querySelector('.main__country').textContent = info.country;
-   document.querySelector('.temp__now').textContent = langs[language].temperature + ': ' + info.temp + "°C";
-   document.querySelector('.weather__main').textContent = info.weather.main;
-   document.querySelector('.weather__description').textContent = info.weather.description[0].toUpperCase() + info.weather.description.slice(1);
-   document.querySelector('.weather__logo').src = `http://openweathermap.org/img/wn/${info.weather.icon}@2x.png`;
-   document.querySelector('.main__wind').textContent = langs[language].wind + ": " + info.wind + ' ' + langs[language].speed;
-}
-
-const setLang = function () {
-   searchBtn.textContent = langs[searchLang.value].search
-   searchCity.placeholder = langs[searchLang.value].city
-   document.querySelector('.log__title').textContent = langs[searchLang.value].history
-   document.querySelector('.lang__title').textContent = langs[searchLang.value].language
-   setInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
-
-}
-
 const getInfo = function (city, lang) {
    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric&lang=${lang}`)
       .then((data) => {
@@ -64,21 +40,9 @@ const getInfo = function (city, lang) {
          } else {
             if (temp.length >= 5) {
                temp.splice(0, 1)
-               temp.push({
-                  city: result.name,
-                  country: result.sys.country,
-                  temp: result.main.temp,
-                  weather: result.weather[0],
-                  wind: result.wind.speed
-               })
+               addTemp(result)
             } else {
-               temp.push({
-                  city: result.name,
-                  country: result.sys.country,
-                  temp: result.main.temp,
-                  weather: result.weather[0],
-                  wind: result.wind.speed
-               })
+               addTemp(result)
             }
             return temp
          }
@@ -99,7 +63,32 @@ const getInfo = function (city, lang) {
       })
 }
 
-document.querySelector('.log__logs').onchange = function (e) {
+window.onload = async () => {
+   await getInfo('Москва', 'ru');
+   setLang();
+}
+
+const addTemp = (result = {}) => {
+   temp.push({
+      city: result.name,
+      country: result.sys.country,
+      temp: result.main.temp,
+      weather: result.weather[0],
+      wind: result.wind.speed
+   })
+}
+
+const setLang = async function () {
+   searchBtn.textContent = langs[searchLang.value].search
+   searchCity.placeholder = langs[searchLang.value].city
+   document.querySelector('.log__title').textContent = langs[searchLang.value].history
+   document.querySelector('.lang__title').textContent = langs[searchLang.value].language
+   getInfo(temp[document.querySelector('.log__logs').value].city, searchLang.value)
+   temp.splice(0, 1)
+   addTemp(temp[document.querySelector('.log__logs').value])
+}
+
+document.querySelector('.log__logs').onchange = function () {
    setInfo(temp[document.querySelector('.log__logs').value], searchLang.value)
 }
 
@@ -110,4 +99,14 @@ searchLang.onchange = function () {
 searchBtn.onclick = function (e) {
    e.preventDefault()
    getInfo(searchCity.value, searchLang.value)
+}
+
+const setInfo = function (info, language) {
+   document.querySelector('.main__city').textContent = info.city;
+   document.querySelector('.main__country').textContent = info.country;
+   document.querySelector('.temp__now').textContent = langs[language].temperature + ': ' + info.temp + "°C";
+   document.querySelector('.weather__main').textContent = info.weather.main;
+   document.querySelector('.weather__description').textContent = info.weather.description[0].toUpperCase() + info.weather.description.slice(1);
+   document.querySelector('.weather__logo').src = `http://openweathermap.org/img/wn/${info.weather.icon}@2x.png`;
+   document.querySelector('.main__wind').textContent = langs[language].wind + ": " + info.wind + ' ' + langs[language].speed;
 }
